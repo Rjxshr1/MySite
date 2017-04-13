@@ -3,7 +3,7 @@ package my.controller;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import my.interceptor.LoginInterceptor;
-import my.service.impl.UserService;
+import my.service.UserService;
 import my.service.impl.UserServiceImpl;
 
 /**

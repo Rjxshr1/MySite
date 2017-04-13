@@ -1,4 +1,4 @@
-package my.service.impl;
+package my.service;
 
 /**
  * Created by rajab on 17/4/13.
@@ -9,6 +9,8 @@ public abstract class UserService {
         INPUT_INVALID,
         PASSWORD_WRONG,
         USER_NOT_EXIST
-    };
+    }
     public abstract LoginResult checkLogin (String username, String password);
+
+   // public abstract User createUser(String username, String password, String role);
 }

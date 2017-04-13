@@ -3,14 +3,12 @@ package my.config;
 import com.jfinal.config.*;
 import com.jfinal.core.JFinal;
 import com.jfinal.ext.handler.ContextPathHandler;
-import com.jfinal.kit.PathKit;
 import com.jfinal.kit.Prop;
 import com.jfinal.kit.PropKit;
-import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
-import com.jfinal.plugin.activerecord.generator.Generator;
 import com.jfinal.template.Engine;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import my.controller.MainController;
+import my.controller.MessageController;
 
 import javax.sql.DataSource;
 
@@ -23,7 +21,10 @@ public class MainConfig extends JFinalConfig {
         Prop prop = PropKit.use("myconfig.properties");
         //开启Jfinal的开发模式
         me.setDevMode(PropKit.getBoolean("devMode", true));
-
+        //设置500错误页面
+        me.setError500View("/pages/error.html");
+        //设置404错误页面
+        me.setError404View("/pages/error.html");
     }
 
     @Override
@@ -33,6 +34,7 @@ public class MainConfig extends JFinalConfig {
         me.setBaseViewPath("/pages");
         //   http://localhost/xxx ->  MainController.xxx()
         me.add("/", MainController.class);
+        me.add("/message", MessageController.class);
     }
 
     @Override
@@ -42,12 +44,14 @@ public class MainConfig extends JFinalConfig {
 
     @Override
     public void configPlugin(Plugins me) {
-     /*   ActiveRecordPlugin arp = new ActiveRecordPlugin(getDataSource());
+        //配置数据库插件
+       /* ActiveRecordPlugin arp = new ActiveRecordPlugin(getDataSource());
         arp.setDialect(new MysqlDialect());
         arp.setDevMode(PropKit.getBoolean("devMode", true));
         arp.setShowSql(PropKit.getBoolean("showSql", true));
         _MappingKit.mapping(arp);
-        me.add(arp);*/
+        me.add(arp);
+        */
     }
 
     @Override
@@ -62,42 +66,18 @@ public class MainConfig extends JFinalConfig {
     }
 
     public static void main(String[] args) {
-         JFinal.start("web", 8080, "/");
-       // generateModels();
+        JFinal.start("web", 8080, "/");
     }
 
     public static DataSource getDataSource() {
-
+        //获取数据源
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUrl(PropKit.get("jdbcurl"));
         mysqlDataSource.setUser(PropKit.get("user"));
         mysqlDataSource.setPassword(PropKit.get("password"));
         return mysqlDataSource;
-
     }
 
-    public static void generateModels() {
-        // 读取配置文件
-        Prop prop = PropKit.use("myconfig.properties");
-        //配置生成的源文件位置，getWebRootPath()为web所在目录,..为上一级目录，应该生成在src目录中
-        String basePath = PathKit.getWebRootPath() + "\\..\\src";
-        //模型基类包名
-        String baseModelPackageName = "my.model.base";
-        //模型类包名
-        String modelPackageName = "my.model";
-        //模型基类生成的位置，要放在相应的包中
-        String baseModelPath = basePath + "\\my\\model\\base";
-        //模型类生成的位置
-        String modelPath = basePath + "\\my\\model";
-        Generator generator = new Generator(getDataSource(), baseModelPackageName, baseModelPath, modelPackageName, modelPath);
-        //SQL方言为MYSQL
-        generator.setDialect(new MysqlDialect());
-        //是否在model中生成dao字段
-        generator.setGenerateDaoInModel(true);
-        generator.setMappingKitOutputDir(modelPath);
-        generator.setMappingKitPackageName(modelPackageName);
-        generator.generate();
 
-    }
 }
 

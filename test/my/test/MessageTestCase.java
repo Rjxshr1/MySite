@@ -18,7 +18,7 @@ public class MessageTestCase extends ControllerTestCase<MainConfig> {
         }
     }
 
-    //@Test
+    @Test
     public void testMessageCreate() {
         //添加测试代码
     }

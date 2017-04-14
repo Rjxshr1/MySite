@@ -8,6 +8,7 @@ import org.junit.BeforeClass;
  * Created by Administrator on 2017/4/13 0013.
  */
 public class MessageTestCase extends ControllerTestCase<MainConfig> {
+    //初始化JFINAL配置
     @BeforeClass
     public static void initConfig() {
         try {
@@ -19,7 +20,7 @@ public class MessageTestCase extends ControllerTestCase<MainConfig> {
 
     //@Test
     public void testMessageCreate() {
-
+        //添加测试代码
     }
 
 }

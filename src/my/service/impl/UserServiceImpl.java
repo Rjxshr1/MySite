@@ -5,7 +5,7 @@ import my.service.UserService;
 /**
  * Created by rajab on 17/4/13.
  */
-public class UserServiceImpl extends UserService {
+public class UserServiceImpl implements UserService {
     @Override
     public LoginResult checkLogin(String username, String password) {
         if (username.isEmpty() || password.isEmpty()) {

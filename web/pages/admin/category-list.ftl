@@ -1,3 +1,5 @@
+<#-- @ftlvariable name="categories" type="java.util.List<my.model.Category>" -->
+<#-- @ftlvariable name="category" type="my.model.Category" -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,12 +18,12 @@
 <body>
 <body>
 <div class="ui left vertical labeled icon menu sidebar" id="sidebar">
-    <a class="active item" href="/admin">
-        <i class="home icon">
+    <a class="item">
+        <i class="home icon" href="/admin">
         </i>
         主页
     </a>
-    <a class="item" href="/admin/category">
+    <a class="active item" href="/admin/category">
         <i class="book icon">
         </i>
         分类管理
@@ -79,54 +81,65 @@
             <h2 class="primary header">
                 后台管理
             </h2>
-            <div class="ui horizontal header divider">
-                <i class="user icon">
-                </i>
-                统计信息
+            <div class="ui buttons">
+                <button class="ui blue button" id="btn-add"><i class="add icon"></i>增加分类</button>
             </div>
-            <div class="ui statistics">
-                <div class="statistic">
-                    <div class="value">
-                        5
+            <table class="ui selectable celled table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>名称</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <#list categories as category>
+                <tr>
+                    <td>${category.id!''}</td>
+                    <td>${category.name}</td>
+                    <td>
+                        <i class="edit icon"></i>编辑
+
+                    </td>
+                </tr>
+                </#list>
+                </tbody>
+            </table>
+        </div>
+        <div class="ui small modal" id="add-dialog" style="width:350px;">
+
+
+            <div class="ui header">添加分类</div>
+            <div class="content">
+                <form action="" class="ui form">
+                    <div class="field">
+                        <label>名称</label>
+                        <div class="ui fluid input">
+                            <input type="text" name="category.name">
+                        </div>
                     </div>
-                    <div class="label">
-                        主题
-                    </div>
-                </div>
-                <div class="statistic">
-                    <div class="value">
-                        40
-                    </div>
-                    <div class="label">
-                        文章
-                    </div>
-                </div>
-                <div class="statistic">
-                    <div class="value">
-                        343
-                    </div>
-                    <div class="label">
-                        评论
-                    </div>
-                </div>
+                </form>
             </div>
-            <div class="ui horizontal header divider">
-                <i class="user icon">
-                </i>
-                服务器信息
+            <div class="actions">
+                <div class="ui approve button">添加</div>
+                <div class="ui cancel button">取消</div>
             </div>
         </div>
     </div>
-    <div class="ui attached bottom vertical footer inverted segment" id="footer">
-        <div class="ui center aligned container">
-            &copy 2017 宁夏大学
-        </div>
+</div>
+<div class="ui attached bottom vertical footer inverted segment" id="footer">
+    <div class="ui center aligned container">
+        &copy 2017 宁夏大学
     </div>
+</div>
 </div>
 </body>
 <script>
     $('.toggler').on('click', function () {
         $('#sidebar').sidebar('toggle');
+    });
+    $('#btn-add').click(function () {
+        $('#add-dialog').modal('show');
     });
 </script>
 </html>

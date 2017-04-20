@@ -5,10 +5,15 @@ import com.jfinal.core.JFinal;
 import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.kit.Prop;
 import com.jfinal.kit.PropKit;
+import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
+import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.template.Engine;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+import jfinal.ext.freemarker.FreemarkerHelper;
+import my.controller.AdminController;
 import my.controller.MainController;
 import my.controller.MessageController;
+import my.model._MappingKit;
 
 import javax.sql.DataSource;
 
@@ -25,6 +30,7 @@ public class MainConfig extends JFinalConfig {
         me.setError500View("/pages/error.html");
         //设置404错误页面
         me.setError404View("/pages/error.html");
+        FreemarkerHelper.registerExtensionTag();
     }
 
     @Override
@@ -35,6 +41,7 @@ public class MainConfig extends JFinalConfig {
         //   http://localhost/xxx ->  MainController.xxx()
         me.add("/", MainController.class);
         me.add("/message", MessageController.class);
+        me.add("/admin", AdminController.class);
     }
 
     @Override
@@ -45,13 +52,13 @@ public class MainConfig extends JFinalConfig {
     @Override
     public void configPlugin(Plugins me) {
         //配置数据库插件
-       /* ActiveRecordPlugin arp = new ActiveRecordPlugin(getDataSource());
+        ActiveRecordPlugin arp = new ActiveRecordPlugin(getDataSource());
         arp.setDialect(new MysqlDialect());
         arp.setDevMode(PropKit.getBoolean("devMode", true));
         arp.setShowSql(PropKit.getBoolean("showSql", true));
         _MappingKit.mapping(arp);
         me.add(arp);
-        */
+
     }
 
     @Override

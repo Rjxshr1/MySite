@@ -1,5 +1,7 @@
 package my.config;
 
+import com.anna.config.Ioc.AutowiredInterceptor;
+import com.anna.config.Ioc.Ioc;
 import com.jfinal.config.*;
 import com.jfinal.core.JFinal;
 import com.jfinal.ext.handler.ContextPathHandler;
@@ -11,6 +13,7 @@ import com.jfinal.template.Engine;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import jfinal.ext.freemarker.FreemarkerHelper;
 import my.controller.AdminController;
+import my.controller.CategoryController;
 import my.controller.MainController;
 import my.controller.MessageController;
 import my.model._MappingKit;
@@ -42,6 +45,7 @@ public class MainConfig extends JFinalConfig {
         me.add("/", MainController.class);
         me.add("/message", MessageController.class);
         me.add("/admin", AdminController.class);
+        me.add("/admin/category", CategoryController.class, "admin");
     }
 
     @Override
@@ -59,11 +63,15 @@ public class MainConfig extends JFinalConfig {
         _MappingKit.mapping(arp);
         me.add(arp);
 
+        Ioc ioc = Ioc.getIoc();
+        ioc.addPackage("my.service", true);
+        me.add(ioc);
+
     }
 
     @Override
     public void configInterceptor(Interceptors me) {
-
+        me.add(new AutowiredInterceptor());
     }
 
     @Override

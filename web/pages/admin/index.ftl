@@ -10,6 +10,7 @@
     </script>
     <link href="/themes/semantic.min.css" rel="stylesheet">
     </link>
+    <link rel="stylesheet" href="/themes/admin.css" rel="stylesheet">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
     </meta>
 </head>
@@ -74,7 +75,7 @@
             </a>
         </div>
     </div>
-    <div class="ui grid container" id="content" style="min-height:580px;">
+    <div class="ui grid container" id="content">
         <div class="fourteen wide column">
             <h2 class="primary header">
                 后台管理

@@ -12,6 +12,7 @@
     </script>
     <link href="/themes/semantic.min.css" rel="stylesheet">
     </link>
+    <link rel="stylesheet" href="/themes/admin.css" rel="stylesheet">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
     </meta>
 </head>
@@ -76,11 +77,16 @@
             </a>
         </div>
     </div>
-    <div class="ui grid container" id="content" style="min-height:580px;">
+    <div class="ui grid container" id="content">
         <div class="fourteen wide column">
             <h2 class="primary header">
                 后台管理
             </h2>
+        <#if errorMsg?exists>
+            <div class="ui error message">${errorMsg}!</div>
+        </#if>
+
+
             <div class="ui buttons">
                 <button class="ui blue button" id="btn-add"><i class="add icon"></i>增加分类</button>
             </div>
@@ -106,23 +112,25 @@
                 </tbody>
             </table>
         </div>
-        <div class="ui small modal" id="add-dialog" style="width:350px;">
-
+        <div class="ui  modal" id="add-dialog" style="width:350px">
 
             <div class="ui header">添加分类</div>
             <div class="content">
-                <form action="" class="ui form">
+
+                <form action="/admin/category/save" class="ui fluid error form" id="category-add-form">
+                    <div class="ui error message"></div>
                     <div class="field">
                         <label>名称</label>
                         <div class="ui fluid input">
-                            <input type="text" name="category.name">
+                            <input type="text" name="category.name" autocomplete="off">
                         </div>
                     </div>
                 </form>
+
             </div>
             <div class="actions">
-                <div class="ui approve button">添加</div>
-                <div class="ui cancel button">取消</div>
+                <div class="ui ok red button">添加</div>
+                <div class="ui cancel blue button">取消</div>
             </div>
         </div>
     </div>
@@ -140,6 +148,31 @@
     });
     $('#btn-add').click(function () {
         $('#add-dialog').modal('show');
+    });
+
+    $('#category-add-form').form({
+        fields: {
+            category_name: {
+                identifier: 'category.name',
+                rules: [{
+                    type: 'empty',
+                    prompt: '名字不能为空'
+                }]
+            }
+        }
+    });
+
+
+    $('#add-dialog').modal({
+        closable: true,
+        onApprove: function () {
+            $('#category-add-form').form('validate form');
+            if ($('#category-add-form').form('is valid')) {
+                $('#category-add-form').form('submit');
+            } else {
+                return false;
+            }
+        }
     });
 </script>
 </html>

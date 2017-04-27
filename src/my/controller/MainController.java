@@ -1,10 +1,10 @@
 package my.controller;
 
+import com.anna.config.Ioc.Autowired;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import my.interceptor.LoginInterceptor;
 import my.service.UserService;
-import my.service.impl.UserServiceImpl;
 
 /**
  * Created by Rajab on 2017/03/30.
@@ -12,14 +12,15 @@ import my.service.impl.UserServiceImpl;
 public class MainController extends Controller {
 
     //用户操作服务
-    private static UserService userService = new UserServiceImpl();
+    @Autowired
+    private static UserService userService;
 
     public void index() {
         renderHtml("<h1>hello!</h1>");
     }
 
     public void login() {
-        renderFreeMarker("test.ftl");
+        renderFreeMarker("login-new.ftl");
     }
 
     public void loginCheck() {

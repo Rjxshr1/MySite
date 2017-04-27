@@ -8,4 +8,7 @@ import my.model.base.BaseCategory;
 @SuppressWarnings("serial")
 public class Category extends BaseCategory<Category> {
 	public static final Category dao = new Category().dao();
+
+
+
 }

@@ -1,7 +1,5 @@
 package my.config;
 
-import com.anna.config.Ioc.AutowiredInterceptor;
-import com.anna.config.Ioc.Ioc;
 import com.jfinal.config.*;
 import com.jfinal.core.JFinal;
 import com.jfinal.ext.handler.ContextPathHandler;
@@ -63,15 +61,12 @@ public class MainConfig extends JFinalConfig {
         _MappingKit.mapping(arp);
         me.add(arp);
 
-        Ioc ioc = Ioc.getIoc();
-        ioc.addPackage("my.service", true);
-        me.add(ioc);
 
     }
 
     @Override
     public void configInterceptor(Interceptors me) {
-        me.add(new AutowiredInterceptor());
+
     }
 
     @Override

@@ -1,11 +1,9 @@
 package my.service;
 
-import com.anna.config.Ioc.Service;
-
 /**
  * Created by rajab on 17/4/13.
  */
-@Service
+
 public class UserService {
     public enum LoginResult {
         LOGIN_OK,

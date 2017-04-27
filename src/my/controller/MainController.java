@@ -1,6 +1,5 @@
 package my.controller;
 
-import com.anna.config.Ioc.Autowired;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import my.interceptor.LoginInterceptor;
@@ -11,9 +10,7 @@ import my.service.UserService;
  */
 public class MainController extends Controller {
 
-    //用户操作服务
-    @Autowired
-    private static UserService userService;
+    private static UserService userService = new UserService();
 
     public void index() {
         renderHtml("<h1>hello!</h1>");
@@ -55,6 +52,10 @@ public class MainController extends Controller {
 
     public void logout() {
 
+    }
+
+    public void register(){
+        renderFreeMarker("register.ftl");
     }
 
 }

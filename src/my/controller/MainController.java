@@ -55,7 +55,7 @@ public class MainController extends Controller {
     }
 
     public void register(){
-        renderFreeMarker("register.ftl");
+        renderFreeMarker("register_new.ftl");
     }
 
 }

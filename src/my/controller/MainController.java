@@ -2,6 +2,7 @@ package my.controller;
 
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
+import com.jfinal.ext.interceptor.POST;
 import my.interceptor.LoginInterceptor;
 import my.service.UserService;
 
@@ -58,8 +59,20 @@ public class MainController extends Controller {
         renderFreeMarker("register.ftl");
     }
 
+    @Before(POST.class)
     public void doregister() {
-        renderText("注册成功!");
+
+        String username = getPara("username");
+        String password = getPara("password");
+        UserService.RegisterResult result = userService.register(username, password);
+        switch (result) {
+            case REGISTER_OK:
+                break;
+            case REGISTER_FAIL:
+                break;
+        }
+
+
         // renderFreeMarker("register.ftl");
     }
 

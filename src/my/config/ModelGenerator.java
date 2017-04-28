@@ -29,9 +29,11 @@ public class ModelGenerator {
         //SQL方言为MYSQL
         generator.setDialect(new MysqlDialect());
         //是否在model中生成dao字段
-        generator.setGenerateDaoInModel(true);
+        generator.setGenerateDaoInModel(false);
+        generator.setGenerateDataDictionary(true);
         generator.setMappingKitOutputDir(modelPath);
         generator.setMappingKitPackageName(modelPackageName);
+
         generator.generate();
     }
 

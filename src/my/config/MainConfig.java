@@ -1,5 +1,6 @@
 package my.config;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import com.jfinal.config.*;
 import com.jfinal.core.JFinal;
 import com.jfinal.ext.handler.ContextPathHandler;
@@ -8,12 +9,8 @@ import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.template.Engine;
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import jfinal.ext.freemarker.FreemarkerHelper;
-import my.controller.AdminController;
-import my.controller.CategoryController;
 import my.controller.MainController;
-import my.controller.MessageController;
 import my.model._MappingKit;
 
 import javax.sql.DataSource;
@@ -41,9 +38,9 @@ public class MainConfig extends JFinalConfig {
         me.setBaseViewPath("/pages");
         //   http://localhost/xxx ->  MainController.xxx()
         me.add("/", MainController.class);
-        me.add("/message", MessageController.class);
-        me.add("/admin", AdminController.class);
-        me.add("/admin/category", CategoryController.class, "admin");
+        //me.add("/message", MessageController.class);
+      //  me.add("/admin", AdminController.class);
+      //  me.add("/admin/category", CategoryController.class, "admin");
     }
 
     @Override
@@ -81,9 +78,10 @@ public class MainConfig extends JFinalConfig {
 
     public static DataSource getDataSource() {
         //获取数据源
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
+        DruidDataSource mysqlDataSource = new DruidDataSource();
+        mysqlDataSource.setDriverClassName("com.mysql.jdbc.Driver");
         mysqlDataSource.setUrl(PropKit.get("jdbcurl"));
-        mysqlDataSource.setUser(PropKit.get("user"));
+        mysqlDataSource.setUsername(PropKit.get("user"));
         mysqlDataSource.setPassword(PropKit.get("password"));
         return mysqlDataSource;
     }

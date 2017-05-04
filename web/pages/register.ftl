@@ -19,12 +19,12 @@
         </div>
         <div class="ui segment">
             <form class="ui fluid form" id="register-form">
-                <div class="ui success message closable" id="success-message">
+                <div class="ui success message" id="success-message">
                     <i class="close icon"></i>
                     <div class="header">
-                        Your user registration was successful.
+                        注册成功
                     </div>
-                    <p>You may now log-in with the username you have chosen</p>
+                    <p>你可以使用注册的用户名登录了</p>
                 </div>
                 <div class="ui error message"></div>
                 <div class="field">
@@ -74,9 +74,6 @@
             }
 
         },
-        onChange: function () {
-            alert(1);
-        },
 
         onSuccess: function (data) {
             var f = $(this).addClass('loading');
@@ -88,6 +85,7 @@
                 success: function (data) {
                     f.removeClass('loading');
                     alert(data.message);
+                    f.form("reset");
                     $('#success-message').show();
                 }
 
@@ -95,6 +93,11 @@
             return false;
         }
     });
+
+    $('#success-message .close').click(
+            function () {
+                $(this).closest('.message').transition('fade');
+            });
 
 
 </script>

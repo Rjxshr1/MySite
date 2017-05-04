@@ -65,14 +65,24 @@ public class MainController extends Controller {
         String username = getPara("username");
         String password = getPara("password");
         UserService.RegisterResult result = userService.register(username, password);
+        boolean success = false;
+        String message = "";
         switch (result) {
             case REGISTER_OK:
+                success = true;
+                message = "注册成功";
                 break;
             case REGISTER_FAIL:
+                message = "注册失败";
+                break;
+            case USER_IS_EXISTED:
+                message = "用户名存在";
                 break;
         }
 
-
+        setAttr("success", success);
+        setAttr("message", message);
+        renderJson();
         // renderFreeMarker("register.ftl");
     }
 

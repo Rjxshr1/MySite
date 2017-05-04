@@ -21,6 +21,9 @@ public class UserService {
         user.setPassword(password);
         try {
             //判断用户名是否存在
+            User findUser = User.dao.findFirst("SELECT * FROM user WHERE username = ?", username);
+            if (findUser != null)
+                return RegisterResult.USER_IS_EXISTED;
             user.save();
             return RegisterResult.REGISTER_OK;
         } catch (Exception ex) {

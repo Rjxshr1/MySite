@@ -7,3 +7,6 @@
 *.rar
 *.zip
 
+/src/myconfig.properties
+
+/.gitignore

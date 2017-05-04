@@ -3,6 +3,7 @@ package my.test;
 import com.jfinal.ext.test.ControllerTestCase;
 import my.config.MainConfig;
 import org.junit.BeforeClass;
+import org.junit.Test;
 
 /**
  * Created by Administrator on 2017/4/13 0013.

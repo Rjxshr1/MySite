@@ -16,14 +16,14 @@ public class UserService {
 
     public RegisterResult register(String username, String password) {
 
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
         try {
             //判断用户名是否存在
             User findUser = User.dao.findFirst("SELECT * FROM user WHERE username = ?", username);
             if (findUser != null)
                 return RegisterResult.USER_IS_EXISTED;
+            User user = new User();
+            user.setUsername(username);
+            user.setPassword(password);
             user.save();
             return RegisterResult.REGISTER_OK;
         } catch (Exception ex) {

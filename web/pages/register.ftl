@@ -29,12 +29,12 @@
                 <div class="ui error message"></div>
                 <div class="field">
                     <label>用户名</label>
-                    <input type="text" class="ui fluid input" name="user.username" autocomplete="off"
+                    <input type="text" class="ui fluid input" name="username" autocomplete="off"
                            placeholder="请输入用户名">
                 </div>
                 <div class="field">
                     <label>密码</label>
-                    <input type="password" class="ui fluid input" name="user.password" autocomplete="off"
+                    <input type="password" class="ui fluid input" name="password" autocomplete="off"
                            placeholder="请输入密码">
                 </div>
                 <div class="field">
@@ -52,14 +52,14 @@
     $('#register-form').form({
         fields: {
             username: {
-                identifier: 'user.username',
+                identifier: 'username',
                 rules: [{
                     type: 'minLength[5]',
                     prompt: '用户名至少为5位'
                 }]
             },
             password: {
-                identifier: 'user.password',
+                identifier: 'password',
                 rules: [{
                     type: 'minLength[6]',
                     prompt: '密码至少为6位'
@@ -68,7 +68,7 @@
             password2: {
                 identifier: 'password2',
                 rules: [{
-                    type: 'match[user.password]',
+                    type: 'match[password]',
                     prompt: '两次密码不一致'
                 }]
             }

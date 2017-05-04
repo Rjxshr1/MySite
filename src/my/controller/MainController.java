@@ -25,21 +25,23 @@ public class MainController extends Controller {
         String username = getPara("username", "");
         String password = getPara("password", "");
         UserService.LoginResult result = userService.checkLogin(username, password);
+        boolean success = false;
         switch (result) {
             case LOGIN_OK:
                 setSessionAttr("username", username);
-                redirect("/success");
+                success = true;
+                setAttr("message", "登录成功");
                 break;
             case INPUT_INVALID:
-                setAttr("errMsg", "用户名或密码为空");
+                setAttr("message", "用户名或密码为空");
                 forwardAction("/login");
                 break;
             case PASSWORD_WRONG:
-                setAttr("errMsg", "用户名或密码错误");
-                forwardAction("/login");
+                setAttr("message", "用户名或密码错误");
                 break;
         }
-
+        setAttr("success", success);
+        renderJson();
     }
 
     @Before(LoginInterceptor.class)

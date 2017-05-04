@@ -75,7 +75,7 @@
 
         },
 
-        onSuccess: function (data) {
+        onSuccess: function (obj) {
             var f = $(this).addClass('loading');
             $.ajax({
                 type: 'POST',
@@ -84,9 +84,13 @@
                 dataType: 'json',
                 success: function (data) {
                     f.removeClass('loading');
-                    alert(data.message);
-                    f.form("reset");
-                    $('#success-message').show();
+                    if(data.success) {
+                        f.form("reset");
+                        $('#success-message').show();
+                    }else{
+                        f.form("add errors", [data.message]);
+                        f.form("clear");
+                    }
                 }
 
             });

@@ -1,14 +1,15 @@
 package my.config;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import com.jfinal.config.*;
 import com.jfinal.core.JFinal;
 import com.jfinal.ext.handler.ContextPathHandler;
+import com.jfinal.ext.interceptor.SessionInViewInterceptor;
 import com.jfinal.kit.Prop;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.template.Engine;
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import jfinal.ext.freemarker.FreemarkerHelper;
 import my.controller.MainController;
 import my.model._MappingKit;
@@ -39,8 +40,8 @@ public class MainConfig extends JFinalConfig {
         //   http://localhost/xxx ->  MainController.xxx()
         me.add("/", MainController.class);
         //me.add("/message", MessageController.class);
-      //  me.add("/admin", AdminController.class);
-      //  me.add("/admin/category", CategoryController.class, "admin");
+        //  me.add("/admin", AdminController.class);
+        //  me.add("/admin/category", CategoryController.class, "admin");
     }
 
     @Override
@@ -63,7 +64,8 @@ public class MainConfig extends JFinalConfig {
 
     @Override
     public void configInterceptor(Interceptors me) {
-
+        //允许在页面中访问session变量
+        me.add(new SessionInViewInterceptor());
     }
 
     @Override
@@ -78,10 +80,9 @@ public class MainConfig extends JFinalConfig {
 
     public static DataSource getDataSource() {
         //获取数据源
-        DruidDataSource mysqlDataSource = new DruidDataSource();
-        mysqlDataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUrl(PropKit.get("jdbcurl"));
-        mysqlDataSource.setUsername(PropKit.get("user"));
+        mysqlDataSource.setUser(PropKit.get("user"));
         mysqlDataSource.setPassword(PropKit.get("password"));
         return mysqlDataSource;
     }

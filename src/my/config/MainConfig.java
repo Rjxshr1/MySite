@@ -3,6 +3,7 @@ package my.config;
 import com.jfinal.config.*;
 import com.jfinal.core.JFinal;
 import com.jfinal.ext.handler.ContextPathHandler;
+import com.jfinal.ext.interceptor.SessionInViewInterceptor;
 import com.jfinal.kit.Prop;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
@@ -10,9 +11,7 @@ import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.template.Engine;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import jfinal.ext.freemarker.FreemarkerHelper;
-import my.controller.AdminController;
 import my.controller.MainController;
-import my.controller.MessageController;
 import my.model._MappingKit;
 
 import javax.sql.DataSource;
@@ -40,8 +39,9 @@ public class MainConfig extends JFinalConfig {
         me.setBaseViewPath("/pages");
         //   http://localhost/xxx ->  MainController.xxx()
         me.add("/", MainController.class);
-        me.add("/message", MessageController.class);
-        me.add("/admin", AdminController.class);
+        //me.add("/message", MessageController.class);
+        //  me.add("/admin", AdminController.class);
+        //  me.add("/admin/category", CategoryController.class, "admin");
     }
 
     @Override
@@ -59,11 +59,13 @@ public class MainConfig extends JFinalConfig {
         _MappingKit.mapping(arp);
         me.add(arp);
 
+
     }
 
     @Override
     public void configInterceptor(Interceptors me) {
-
+        //允许在页面中访问session变量
+        me.add(new SessionInViewInterceptor());
     }
 
     @Override

@@ -9,7 +9,7 @@
     <title>登录成功</title>
 </head>
 <body>
-欢迎你，登录成功。
+欢迎你 ${session.username!''}，登录成功。
 
 </body>
 </html>

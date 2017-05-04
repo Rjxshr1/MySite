@@ -1,7 +1,7 @@
 -- --------------------------------------------------------
 -- 主机:                           127.0.0.1
--- 服务器版本:                        5.5.38 - MySQL Community Server (GPL)
--- 服务器操作系统:                      Win32
+-- 服务器版本:                        5.5.50 - MySQL Community Server (GPL)
+-- 服务器操作系统:                      Win64
 -- HeidiSQL 版本:                  8.0.0.4396
 -- --------------------------------------------------------
 
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `category` (
 DELETE FROM `category`;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
 INSERT INTO `category` (`id`, `name`) VALUES
-  (1, 'Life');
+	(1, 'Life');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 
 
@@ -73,15 +73,15 @@ CREATE TABLE IF NOT EXISTS `user` (
   `id` int(4) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) DEFAULT NULL,
   `password` varchar(32) DEFAULT NULL,
-  `role` varchar(255) DEFAULT NULL,
+  `admin` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- 正在导出表  mysite.user 的数据：1 rows
 DELETE FROM `user`;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`id`, `username`, `password`, `role`) VALUES
-  (1, 'admin', 'admin', 'admin');
+INSERT INTO `user` (`id`, `username`, `password`, `admin`) VALUES
+	(1, 'admin', 'admin', 1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

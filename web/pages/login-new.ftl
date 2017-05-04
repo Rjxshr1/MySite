@@ -20,20 +20,19 @@
     </div>
 
     <div class="ui six wide column">
-    <#if errMsg?exists>
-        <div class="ui error message">${errMsg!''}</div>
-    </#if>
-        <form action="loginCheck" method="post" class="ui form">
+
+        <form action="loginCheck" method="post" class="ui form" id="login-form">
             <div class="ui segment">
+                <div class="ui error message"></div>
                 <div class="field">
                     <div class="ui fluid left icon input">
-                        <input type="text" name="username" placeholder="用户名"/>
+                        <input type="text" name="username" placeholder="用户名" autocomplete="off"/>
                         <i class="user icon"></i>
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui fluid left icon input">
-                        <input type="password" name="password" placeholder="密码"/>
+                        <input type="password" name="password" placeholder="密码" autocomplete="off"/>
                         <i class="lock icon"></i>
                     </div>
                 </div>
@@ -48,6 +47,31 @@
     </div>
 
 </div>
+<script>
+    loginform = $('#login-form');
+    loginform.form({
+        onSuccess: function () {
+            loginform.addClass('loading');
+            $.ajax({
+                type: 'POST',
+                url: '/loginCheck',
+                data: loginform.serialize(),
+                dataType: 'json',
+                success: function (data) {
+                    loginform.removeClass('loading');
+                    if (data.success) {
+                        window.location.href = "/success";
+                    } else {
+                        loginform.form('add errors', [data.message]);
+                        loginform.form('clear');
+                    }
+                }
+            });
+            return false;
+        }
+    });
+
+</script>
 
 </body>
 </html>

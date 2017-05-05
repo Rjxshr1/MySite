@@ -14,10 +14,9 @@ public class UserService {
 
     public RegisterResult register(String username, String password) {
 
+        //TODO:完成注册
+        //首先判用户是否存在，不存在则new User，并save
             return RegisterResult.USER_IS_EXISTED;
-
-
-
     }
 
 

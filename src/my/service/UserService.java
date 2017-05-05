@@ -1,7 +1,5 @@
 package my.service;
 
-import my.model.User;
-
 /**
  * Created by rajab on 17/4/13.
  */
@@ -16,19 +14,7 @@ public class UserService {
 
     public RegisterResult register(String username, String password) {
 
-        try {
-            //判断用户名是否存在
-            User findUser = User.dao.findFirst("SELECT * FROM user WHERE username = ?", username);
-            if (findUser != null)
-                return RegisterResult.USER_IS_EXISTED;
-            User user = new User();
-            user.setUsername(username);
-            user.setPassword(password);
-            user.save();
-            return RegisterResult.REGISTER_OK;
-        } catch (Exception ex) {
-
-        }
+         //注册
         return RegisterResult.REGISTER_FAIL;
     }
 

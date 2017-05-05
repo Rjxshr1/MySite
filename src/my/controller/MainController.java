@@ -64,11 +64,11 @@ public class MainController extends Controller {
     @Before(POST.class)
     public void doregister() {
 
-        String username = getPara("username");
-        String password = getPara("password");
+        String username = getPara("username", "");
+        String password = getPara("password", "");
         UserService.RegisterResult result = userService.register(username, password);
-        boolean success = false;
         String message = "";
+        boolean success = false;
         switch (result) {
             case REGISTER_OK:
                 success = true;
@@ -82,10 +82,11 @@ public class MainController extends Controller {
                 break;
         }
 
-        setAttr("success", success);
+      //  setAttr("success", success);
         setAttr("message", message);
-        renderJson();
-        // renderFreeMarker("register.ftl");
+        renderFreeMarker("register-result.ftl");
+
+
     }
 
 }

@@ -7,15 +7,17 @@ package my.service;
 public class UserService {
 
     public enum RegisterResult {
-        REGISTER_OK,
-        USER_IS_EXISTED,
-        REGISTER_FAIL
+        REGISTER_OK,  //注册成功
+        USER_IS_EXISTED, //用户存在
+        REGISTER_FAIL // 注册成败
     }
 
     public RegisterResult register(String username, String password) {
 
-         //注册
-        return RegisterResult.REGISTER_FAIL;
+            return RegisterResult.USER_IS_EXISTED;
+
+
+
     }
 
 

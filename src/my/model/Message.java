@@ -7,5 +7,7 @@ import my.model.base.BaseMessage;
  */
 @SuppressWarnings("serial")
 public class Message extends BaseMessage<Message> {
-	public static final Message dao = new Message().dao();
+    public static final Message dao = new Message().dao();
+
+
 }

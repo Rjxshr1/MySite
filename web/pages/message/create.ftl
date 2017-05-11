@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="/scripts/jquery.js" type="text/javascript"></script>
     <script src="/scripts/semantic.min.js" type="text/javascript"></script>
+    <script src="/scripts/tqeditor/TQEditor.with-plugs.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="/themes/semantic.min.css">
     <title>登录</title>
 
@@ -31,18 +32,17 @@
                 </div>
                 <div class="field">
                     <label>内容</label>
-                    <textarea name="message.content" rows="6"></textarea>
+                    <textarea name="message.content" rows="6" id="message.content"> </textarea>
                 </div>
 
                 <button class="ui fluid green button" type="submit">留言</button>
             </div>
 
         </form>
-
-
     </div>
 
 </div>
 
 </body>
+
 </html>

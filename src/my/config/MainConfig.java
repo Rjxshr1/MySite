@@ -12,6 +12,7 @@ import com.jfinal.template.Engine;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import jfinal.ext.freemarker.FreemarkerHelper;
 import my.controller.MainController;
+import my.controller.MessageController;
 import my.model._MappingKit;
 
 import javax.sql.DataSource;
@@ -28,7 +29,7 @@ public class MainConfig extends JFinalConfig {
         //设置500错误页面
         me.setError500View("/pages/error.html");
         //设置404错误页面
-        me.setError404View("/pages/error.html");
+        me.setError404View("/pages/404.html");
         FreemarkerHelper.registerExtensionTag();
     }
 
@@ -39,7 +40,7 @@ public class MainConfig extends JFinalConfig {
         me.setBaseViewPath("/pages");
         //   http://localhost/xxx ->  MainController.xxx()
         me.add("/", MainController.class);
-        //me.add("/message", MessageController.class);
+        me.add("/message", MessageController.class, "message");
         //  me.add("/admin", AdminController.class);
         //  me.add("/admin/category", CategoryController.class, "admin");
     }

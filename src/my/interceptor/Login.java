@@ -6,7 +6,7 @@ import com.jfinal.aop.Invocation;
 /**
  * Created by Administrator on 2017/4/6 0006.
  */
-public class LoginInterceptor implements Interceptor {
+public class Login implements Interceptor {
     @Override
     public void intercept(Invocation invocation) {
         if(invocation.getController().getSessionAttr("username") == null)

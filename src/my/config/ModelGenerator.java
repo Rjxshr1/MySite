@@ -5,6 +5,7 @@ import com.jfinal.kit.Prop;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.activerecord.generator.Generator;
+import com.jfinal.plugin.activerecord.generator.MetaBuilder;
 import org.apache.commons.io.FilenameUtils;
 
 /**
@@ -26,6 +27,15 @@ public class ModelGenerator {
         //模型类生成的位置
         String modelPath = FilenameUtils.concat(basePath, "my/model");
         Generator generator = new Generator(MainConfig.getDataSource(), baseModelPackageName, baseModelPath, modelPackageName, modelPath);
+
+        generator.setGenerateChainSetter(true);
+        generator.setMetaBuilder(new MetaBuilder(MainConfig.getDataSource()) {
+            @Override
+            protected boolean isSkipTable(String tableName) {
+                return tableName.endsWith("_view");
+
+            }
+        });
         //SQL方言为MYSQL
         generator.setDialect(new MysqlDialect());
         //是否在model中生成dao字段

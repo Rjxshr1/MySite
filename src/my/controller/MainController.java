@@ -3,7 +3,7 @@ package my.controller;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.ext.interceptor.POST;
-import my.interceptor.LoginInterceptor;
+import my.interceptor.Login;
 import my.service.UserService;
 
 /**
@@ -44,20 +44,26 @@ public class MainController extends Controller {
         renderJson();
     }
 
-    @Before(LoginInterceptor.class)
+    @Before(Login.class)
     public void success() {
         renderFreeMarker("success.ftl");
     }
 
+    @Before(Login.class)
     public void main() {
         renderFreeMarker("main.ftl");
     }
 
     public void logout() {
+        //TODO:退出登录
+        //提示 (1)使用removeSessionAttr(key)方法从Session中移除登录的username
+        //(2)使用 redicrect(url)方法跳转到登录页面
 
     }
 
     public void register() {
+        //TODO:理解register-ref.ftl页面后  选择renderFreeMarker("register-ref.ftl");
+        // 提示：该页面期望获得json格式的注册结果 renderJson()
         renderFreeMarker("register.ftl");
     }
 
@@ -82,10 +88,14 @@ public class MainController extends Controller {
                 break;
         }
 
-      //  setAttr("success", success);
+
+        // TODO: 注册显示的是register-ref.ftl
+        //需要使用renderJson()方法 返回json数据 格式为:
+        // ｛success : true或false, message : 返回的消息}
+
+        //  setAttr("success", success);
         setAttr("message", message);
         renderFreeMarker("register-result.ftl");
-
 
     }
 

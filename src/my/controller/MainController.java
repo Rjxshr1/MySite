@@ -99,4 +99,15 @@ public class MainController extends Controller {
 
     }
 
+    @Before(Login.class)
+    public void needlogin() {
+
+        renderText("ok");
+    }
+
+    @Before(Login.class)
+    public void abc() {
+
+        renderText("abc");
+    }
 }

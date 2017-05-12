@@ -1,7 +1,12 @@
 package my.controller;
 
+import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
+import com.jfinal.plugin.activerecord.Record;
+import my.interceptor.Login;
 import my.service.MessageService;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/4/13 0013.
@@ -15,8 +20,9 @@ public class MessageController extends Controller {
     }
 
     public void list() {
-        //TODO:显示所有留言页面
-
+        List<Record> messages = messageService.getAllMessageDetailRecord();
+        setAttr("messages", messages);
+        renderFreeMarker("list.ftl");
     }
 
     public void save() {
@@ -31,6 +37,7 @@ public class MessageController extends Controller {
     }
 
 
+    @Before(Login.class)
     public void create() {
         //TODO:显示发表留言页面 要求登录后才能留言
         // 提示 @Before(Login.class) 使用拦截器

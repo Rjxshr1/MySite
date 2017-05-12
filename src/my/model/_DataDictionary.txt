@@ -25,7 +25,7 @@ Table: post
  title       | VARCHAR(50)   | YES  |     |                   |         
  content     | TEXT(65535)   | YES  |     |                   |         
  category_id | INT(10)       | NO   |     |                   |         
- author_id   | INT(10)       | NO   |     |                   |         
+ user_id     | INT(10)       | NO   |     |                   |         
  pubdate     | TIMESTAMP(19) | YES  |     | CURRENT_TIMESTAMP |         
 -------------+---------------+------+-----+-------------------+---------
 

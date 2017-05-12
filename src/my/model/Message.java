@@ -10,4 +10,9 @@ public class Message extends BaseMessage<Message> {
     public static final Message dao = new Message().dao();
 
 
+    public String getUsername(){
+        User user = User.dao.findById(getUserId());
+        return user.getUsername();
+    }
+
 }

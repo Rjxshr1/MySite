@@ -33,7 +33,7 @@
                 <#list messages! as message>
                 <tr>
                     <td>${message.id!''}</td>
-                    <td>${message.author!''}</td>
+                    <td>${message.username!''}</td>
                     <td>${message.content!''}</td>
                     <td>${message.pubdate!''}</td>
                 </tr>

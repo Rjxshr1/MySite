@@ -1,5 +1,6 @@
 package my.service;
 
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import my.model.Message;
 import my.model.User;
@@ -30,13 +31,13 @@ public class MessageService {
 
     public List<Message> getAllMessage() {
         //TODO:获得所有留言表记录
-        throw new RuntimeException("未完成");
+        return Message.dao.find("SELECT * from message_detail_view ");
     }
 
     public List<Record> getAllMessageDetailRecord() {
-        //TODO:获得所有留言详情 使用
+        //TODO:获得所有留言详情 使用视图
 
-        throw new RuntimeException("未完成");
+       return Db.find("SELECT * from message_detail_view");
     }
 
     public List<Message> getAllMessageDetail() {

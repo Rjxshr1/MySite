@@ -45,13 +45,13 @@ public abstract class BasePost<M extends BasePost<M>> extends Model<M> implement
 		return get("category_id");
 	}
 
-	public M setAuthorId(java.lang.Integer authorId) {
-		set("author_id", authorId);
+	public M setUserId(java.lang.Integer userId) {
+		set("user_id", userId);
 		return (M)this;
 	}
 
-	public java.lang.Integer getAuthorId() {
-		return get("author_id");
+	public java.lang.Integer getUserId() {
+		return get("user_id");
 	}
 
 	public M setPubdate(java.util.Date pubdate) {

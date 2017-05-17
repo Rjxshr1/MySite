@@ -64,7 +64,8 @@ public class MainController extends Controller {
     public void register() {
         //TODO:理解register-ref.ftl页面后  选择renderFreeMarker("register-ref.ftl");
         // 提示：该页面期望获得json格式的注册结果 renderJson()
-        renderFreeMarker("register.ftl");
+        renderFreeMarker("register-ref.ftl");
+        //renderFreeMarker("register-ref.ftl");
     }
 
     @Before(POST.class)
@@ -88,15 +89,15 @@ public class MainController extends Controller {
                 break;
         }
 
-
+        System.out.println("success is " + success);
+        System.out.println("message is " + message);
         // TODO: 注册显示的是register-ref.ftl
         //需要使用renderJson()方法 返回json数据 格式为:
         // ｛success : true或false, message : 返回的消息}
 
-        //  setAttr("success", success);
+        setAttr("success", success);
         setAttr("message", message);
-        renderFreeMarker("register-result.ftl");
-
+        renderJson();
     }
 
     @Before(Login.class)

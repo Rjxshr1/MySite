@@ -14,6 +14,7 @@ import jfinal.ext.freemarker.FreemarkerHelper;
 import my.controller.MainController;
 import my.controller.MessageController;
 import my.model._MappingKit;
+import my.controller.AdminController;
 
 import javax.sql.DataSource;
 
@@ -33,6 +34,7 @@ public class MainConfig extends JFinalConfig {
         FreemarkerHelper.registerExtensionTag();
     }
 
+
     @Override
     public void configRoute(Routes me) {
 
@@ -41,7 +43,7 @@ public class MainConfig extends JFinalConfig {
         //   http://localhost/xxx ->  MainController.xxx()
         me.add("/", MainController.class);
         me.add("/message", MessageController.class, "message");
-        //  me.add("/admin", AdminController.class);
+        me.add("/admin", AdminController.class);
         //  me.add("/admin/category", CategoryController.class, "admin");
     }
 

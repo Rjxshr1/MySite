@@ -8,7 +8,7 @@
     <script src="/scripts/jquery.js" type="text/javascript"></script>
     <script src="/scripts/semantic.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="/themes/semantic.min.css">
-    <title>登录</title>
+    <title>注册</title>
 
 </head>
 <body>
